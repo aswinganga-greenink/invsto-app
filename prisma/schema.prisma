@@ -1,0 +1,21 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider             = "prisma-client-py"
+  interface            = "asyncio"
+  recursive_type_depth = 5
+  enable_experimental_decimal = true
+}
+
+model Candle {
+  id        Int      @id @default(autoincrement())
+  datetime  DateTime @unique
+  open      Decimal  @db.Decimal(18,6)
+  high      Decimal  @db.Decimal(18,6)
+  low       Decimal  @db.Decimal(18,6)
+  close     Decimal  @db.Decimal(18,6)
+  volume    BigInt
+}
