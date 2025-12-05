@@ -31,11 +31,13 @@ Make sure that you have a postgres db running and you provided the DATABASE_URL 
 ```bash
 #clone the repo to your local env
 docker build -t invsto-app
+```
 
 ### 2. Seed the data
 ```bash
 # make sure to have a data.csv file in the root folder
 docker exec -it <container_id> python seed.py
+```
 
 ### 3. Api docs
 Once the app is running you can access the api docs from
@@ -45,3 +47,4 @@ http://localhost:8000/docs
 ```bash
 docker exec -it <container_id> bash
 coverage run -m unittest discover -s tests -p "test_*.py" && coverage report -m
+```
