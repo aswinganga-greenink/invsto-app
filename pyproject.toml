@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "invsto_trading_app"
+version = "0.1.0"
+description = "FastAPI Trading App for Internship"
+requires-python = ">=3.9"
+dependencies = [
+    "fastapi",
+    "uvicorn",
+    "prisma",
+    "pydantic"
+]
+
+[tool.setuptools.packages.find]
+where = ["."] 

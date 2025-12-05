@@ -2,7 +2,8 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI, HTTPException
 from typing import List
 from prisma import Prisma
-from validation.schema import CandleCreate, CandleResponse
+from validation.schema import CandleCreate, CandleResponse, StratPerf
+from logic.startegy import calc_strat
 
 db = Prisma()
 
@@ -42,3 +43,11 @@ async def get_candle():
     records = await db.candle.find_many(order={'datetime':'asc'}) #retrive data in ascending order by date
 
     return records
+
+
+
+@app.get("/strategy/performance", response_model=StratPerf)
+async def get_strategy_performance():
+
+    result = await calc_strat(db)
+    return result
