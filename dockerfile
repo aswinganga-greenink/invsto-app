@@ -3,12 +3,18 @@ WORKDIR /app
 
 COPY requirements.txt .
 
-RUN apt-get update && apt-get install -y curl && \
-    pip install --no-cache-dir -r requirements.txt
+# Libatomic, openssl for prisma - it isnt covered in slim model
+RUN apt-get update && apt-get install -y \
+    curl \
+    libatomic1 \
+    openssl \
+    && rm -rf /var/lib/apt/lists/* \
+    && pip install --no-cache-dir -r requirements.txt
+
 
 COPY . .
 
-RUN prisma generate
+RUN python3 -m prisma generate
 
 EXPOSE 8000
 
