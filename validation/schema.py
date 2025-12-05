@@ -20,7 +20,7 @@ class CandleBase(BaseModel):
 # POST call validation model
 class CandleCreate(CandleBase):
 
-    #ensure the value is high
+    #ensure the value is a number
     @field_validator('high')
     @classmethod
     def valid_high(cls, v, info):
